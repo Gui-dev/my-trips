@@ -21,6 +21,6 @@ export const Content = styled.div`
   p {
     font-size: var(--small);
     line-height: var(--medium);
-    margin-bottom: var(--large);
+    margin-bottom: var(--small);
   }
 `

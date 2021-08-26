@@ -4,22 +4,22 @@ import { LinkWrapper } from 'components/LinkWrapper'
 
 import { Container, Title, Content } from './style'
 
-export const AboutTemplate = () => {
+type PagesTemplateProps = {
+  title: string
+  content: string
+}
+
+export const PagesTemplate = ({ title, content }: PagesTemplateProps) => {
   return (
     <Container>
       <LinkWrapper href="/">
         <CloseOutline size={32} area-label="Home"/>
       </LinkWrapper>
 
-      <Title>About - My Trips</Title>
+      <Title>{ title }</Title>
 
       <Content>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Esse dolorum, tenetur delectus enim minima alias sunt numquam.
-          Atque sapiente facere officiis voluptates molestias,
-          obcaecati modi illum similique, ut hic natus?
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: content }}/>
       </Content>
     </Container>
   )
