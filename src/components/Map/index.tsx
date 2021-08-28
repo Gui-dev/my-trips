@@ -1,6 +1,5 @@
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-
-// import { Container, Description, Illustration, Logo, Title } from './style'
+import { useRouter } from 'next/dist/client/router'
+import { MapContainer, Marker, TileLayer } from 'react-leaflet'
 
 type Place = {
   id: string
@@ -10,6 +9,9 @@ type Place = {
     latitude: number
     longitude: number
   }
+  description: {
+    html: string
+  }
 }
 
 export type MapProps = {
@@ -17,23 +19,45 @@ export type MapProps = {
 }
 
 const Map = ({ places }: MapProps) => {
-  return (
-    <MapContainer center={[0, 0]} zoom={3} style={{ height: '100%', width: '100%' }}>
+  const router = useRouter()
+  const MAPBOX_API_KEY = process.env.NEXT_PUBLIC_MAPBOX_API_KEY
+  const MAPBOX_USERID = process.env.NEXT_PUBLIC_MAPBOX_USERID
+  const MAPBOX_STYLEID = process.env.NEXT_PUBLIC_MAPBOX_STYLEID
+  const url = `https://api.mapbox.com/styles/v1/${MAPBOX_USERID}/${MAPBOX_STYLEID}/tiles/256/{z}/{x}/{y}@2x?access_token=${MAPBOX_API_KEY}`
+
+  const handleNavigationToPlace = (slug: string) => {
+    router.push(`/place/${slug}`)
+  }
+
+  const CustomTileLayer = () => {
+    return MAPBOX_API_KEY
+      ? (
+        <TileLayer
+          attribution='© <a href="https://apps.mapbox.com/feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url={url}
+        />
+        )
+      : (
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+        )
+  }
+
+  return (
+    <MapContainer center={[0, 0]} zoom={3} style={{ height: '100%', width: '100%' }}>
+      <CustomTileLayer />
       { places?.map(place => {
         return (
           <Marker
-            key={String(place.id)}
+            key={`place-${String(place.slug)}`}
             position={[place.location.latitude, place.location.longitude]}
             title={place.name}
-          >
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
+            eventHandlers={{
+              click: () => handleNavigationToPlace(place.slug)
+            }}
+          />
         )
       }) }
     </MapContainer>
