@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import NextNProgressbar from 'nextjs-progressbar'
 
 import { GlobalStyle } from 'styles/global'
 
@@ -20,6 +21,12 @@ function MyApp ({ Component, pageProps }: AppProps) {
         <title>My Trips</title>
       </Head>
       <GlobalStyle />
+      <NextNProgressbar
+        color="#FFCD00"
+        startPosition={ 0.3 }
+        stopDelayMs={ 200 }
+        height={3}
+      />
       <Component {...pageProps} />
     </>
   )
