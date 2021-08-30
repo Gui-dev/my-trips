@@ -1,4 +1,4 @@
-<h1 style="text-align: center">My trips</h1>
+<h1 align="center">My trips</h1>
 <p>
 A simple project to show in a map the places that I went and show more
 informations and photos when clicked
