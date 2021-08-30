@@ -10,9 +10,7 @@ informations and photos when clicked
   - [NextJS](https://nextjs.org)
   - [Typescript](https://www.typescriptlang.org)
   - [Styled Components](https://www.styled-components.com)
-  - [Grapghcms](https://graphcms.com/)
-
-  https://graphcms.com/
+  - [Grapghcms](https://graphcms.com)
 
 ## Config used
   - [Eslint](https://eslint.org)
