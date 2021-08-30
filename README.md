@@ -77,3 +77,6 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+
+Open [App hosted on vercel](https://my-trips-wheat.vercel.app) with your browser to see the result.
+
